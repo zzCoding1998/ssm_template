@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zz.dao.BookMapper">
+    
+    <select id="getBookById" parameterType="int" resultType="book" >
+        select * from bookstore.bs_books where id = #{id};
+    </select>
+    
+    <select id="getBookList" resultType="book" >
+        select * from bookstore.bs_books;
+    </select>
+    
+    <insert id="addBook" parameterType="book" useGeneratedKeys="true" >
+        insert into bookstore.bs_books(book_name, book_desc, book_price, img_url, author, cat_id, issue_date,
+                                       shelve_operated_at, is_on_shelf, inventory_quantity, created_at, updated_at)
+        VALUES (#{bookName}, #{bookDesc}, #{bookPrice}, #{imgUrl}, #{author}, #{catId}, #{issueDate},
+                #{shelveOperatedAt}, #{isOnShelf},
+                #{inventoryQuantity}, #{createdAt}, #{updatedAt});
+    </insert>
+    
+    <update id="updateBook" parameterType="book" >
+        update bookstore.bs_books
+        <set>
+            <if test="bookName != null">book_name = #{bookName},</if>
+            <if test="bookName != null">book_desc = #{bookName},</if>
+            <if test="bookName != null">book_price = #{bookName},</if>
+            <if test="bookName != null">img_url = #{bookName},</if>
+            <if test="bookName != null">author = #{bookName},</if>
+            <if test="bookName != null">cat_id = #{bookName},</if>
+            <if test="bookName != null">issue_date = #{bookName},</if>
+            <if test="bookName != null">shelve_operated_at = #{bookName},</if>
+            <if test="bookName != null">is_on_shelf = #{bookName},</if>
+            <if test="bookName != null">inventory_quantity = #{bookName},</if>
+            <if test="bookName != null">created_at = #{bookName},</if>
+            <if test="bookName != null">updated_at = #{bookName},</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    
+    <delete id="removeBook" parameterType="int" >
+        delete from bookstore.bs_books where id = #{id};
+    </delete>
+</mapper>
